@@ -1,0 +1,39 @@
+<p>Years ago there was some really good software that blocked cookies and stopped websites tracking you around the internet. You switched it on and the web just left you alone. That kind of thing still exists, but tracking has moved on a lot since then, and most of today's blockers either only deal with adverts or give you a hundred switches you don't understand. So I made my own: Leave Me Alone, a free extension for Chrome and the other browsers built on the same engine (Edge, Brave, Opera, Arc and Vivaldi).</p>
+<figure class="wp-block-image size-large"><img src="%%IMG%%" alt="The Leave Me Alone popup on theguardian.com: 96 requests blocked or cleaned, with the protection slider set to Balanced" style="max-width:320px;height:auto"/><figcaption>One slider from Off to Paranoid. This is the Guardian's front page on the default setting.</figcaption></figure>
+<h2>How websites follow you around</h2>
+<p>Cookies are only part of it now. When you open a typical news site, your browser quietly contacts dozens of other companies as well: advertising networks, analytics firms, "data brokers" who build profiles of people and sell them. Each of them learns which page you're reading. They follow you from site to site in several ways:</p>
+<ul>
+<li><strong>Third-party cookies.</strong> A small file one company leaves in your browser and reads back on every other site that uses it.</li>
+<li><strong>Tagged links.</strong> The bits stuck on the end of links, like <code>?utm_source=</code> or <code>fbclid=</code>, that tell a site exactly where you came from.</li>
+<li><strong>Redirect links.</strong> Google, Facebook and YouTube often send your click through their own servers first, so they can record it.</li>
+<li><strong>Fingerprinting.</strong> The sneaky one. Every computer draws text and graphics very slightly differently, and has its own mix of screen size, graphics card and so on. A site can measure all that and recognise you again without storing anything at all, so clearing your cookies doesn't help.</li>
+<li><strong>Session recording.</strong> Some sites record every mouse movement, scroll and keypress so they can replay your visit later.</li>
+</ul>
+<h2>One slider, five levels</h2>
+<p>Instead of a page of settings, Leave Me Alone has a single slider. Each level does everything the one before it does, plus a bit more:</p>
+<ul>
+<li><strong>Off.</strong> Nothing. You're on your own.</li>
+<li><strong>Mild.</strong> Blocks about 200 of the biggest advertising and analytics companies, strips the tracking tags off links (including links you copy to send to someone), takes Google, Facebook and YouTube's redirects out of links, and tells every site you don't want to be tracked or have your data sold. Almost nothing breaks.</li>
+<li><strong>Balanced</strong> (the default). Other companies' cookies are stripped out completely, they aren't told which page you were on, and their tracking "pings" are blocked. This is the one I'd leave it on.</li>
+<li><strong>Strict.</strong> Also blocks session recorders, fingerprinting companies and social media buttons that report back. It adds tiny invisible changes to your computer's fingerprint that are different on every site, so sites can't compare notes and match you up. It also hides your graphics card and battery level, and stops video-calling features giving away your real internet address. The odd site may misbehave.</li>
+<li><strong>Paranoid.</strong> Totally over the top, and things will break. No embedded videos, chat boxes or anything else from other companies at all. It fakes your computer's details and turns off video calling in the browser. When you close the last tab for a site, it wipes everything that site stored on your computer.</li>
+</ul>
+<p>If a site stops working properly, click the switch at the top of the popup and Leave Me Alone leaves that one site alone. You can see and change the list of trusted sites at any time.</p>
+<h2>What makes it different</h2>
+<ul>
+<li><strong>It's fast.</strong> The blocking is handed to the browser's own built-in blocker rather than checked by the extension one request at a time, so pages load as quickly as they did before, or quicker, since there's less rubbish to download.</li>
+<li><strong>It deals with fingerprinting properly.</strong> Rather than blocking the bits of the browser that fingerprinting uses, which breaks things and makes you stand out, it gives each website a slightly different, made-up version of you. A site sees the same "you" every time it looks that day, but no two sites see the same one.</li>
+<li><strong>It doesn't collect anything.</strong> There's no account, no adverts, no "acceptable ads" deals and nothing sent anywhere. It all runs on your own computer.</li>
+<li><strong>It's tested.</strong> There's an automatic test that loads it into Chrome and checks that every level really does what it says: trackers blocked, links cleaned, cookies stripped, fingerprints changed, trusted sites left alone.</li>
+</ul>
+<h2>Install it, it's free</h2>
+<p>Leave Me Alone is free and open source. The code is on GitHub: <a href="https://github.com/Rickkendall/leave-me-alone">github.com/Rickkendall/leave-me-alone</a>. It isn't in the Chrome Web Store yet, so for now you install it by hand. It takes a minute:</p>
+<ol>
+<li>On the <a href="https://github.com/Rickkendall/leave-me-alone">GitHub page</a>, click the green <strong>Code</strong> button, choose <strong>Download ZIP</strong>, and unzip it somewhere you'll keep it, such as your Documents folder.</li>
+<li>In Chrome, type <code>chrome://extensions</code> in the address bar (or <code>edge://extensions</code> in Edge, <code>brave://extensions</code> in Brave) and turn on <strong>Developer mode</strong> in the top corner.</li>
+<li>Click <strong>Load unpacked</strong> and choose the <strong>extension</strong> folder inside the one you unzipped.</li>
+<li>Click the jigsaw-piece icon in the toolbar and pin <strong>Leave Me Alone</strong> so the shield is always there.</li>
+</ol>
+<p>Don't move or delete the folder afterwards, because Chrome runs the extension from it. Chrome may show a note about developer-mode extensions now and then. That's normal for anything installed this way, and you can dismiss it.</p>
+<h2>A word of honest advice</h2>
+<p>Leave Me Alone makes you much harder to follow, but it can't make you invisible. Any site you log in to knows exactly who you are, and your internet provider can still see which sites you visit. Its list of trackers is hand-picked rather than the huge community lists some blockers use, so it catches the big players but not every small one. It goes happily alongside an ad blocker if you want one. And if you only change one thing, leave it on Balanced: that stops most of the tracking and almost never gets in your way.</p>
