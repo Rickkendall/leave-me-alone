@@ -149,7 +149,9 @@ api.tabs.onRemoved.addListener(async (tabId) => {
 api.runtime.onMessage.addListener((msg, _sender, reply) => {
   if (msg?.type === "blockedCount") {
     DNR.getMatchedRules({ tabId: msg.tabId })
-      .then((r) => reply({ count: r.rulesMatchedInfo.length }))
+      // "signals" only adds the GPC/DNT headers to every request, so it isn't a block.
+      .then((r) => reply({ count: r.rulesMatchedInfo.filter((m) => m.rule.rulesetId !== "signals"
+        && m.rule.rulesetId !== "_dynamic").length }))
       .catch(() => reply({ count: null }));
     return true;
   }
