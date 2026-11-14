@@ -4,7 +4,6 @@ var LMA_LEVELS = [
     name: "Off",
     blurb: "Nothing is blocked. You're on your own.",
     features: [],
-    rulesets: [],
   },
   {
     name: "Mild",
@@ -15,7 +14,6 @@ var LMA_LEVELS = [
       "Unwraps Google / Facebook / YouTube redirect links",
       "Sends Global Privacy Control + Do Not Track",
     ],
-    rulesets: ["trackers", "params", "signals"],
   },
   {
     name: "Balanced",
@@ -26,7 +24,6 @@ var LMA_LEVELS = [
       "No Referer sent to third parties",
       "Blocks tracking pings & beacons to third parties",
     ],
-    rulesets: ["trackers", "params", "signals", "balanced"],
   },
   {
     name: "Strict",
@@ -37,11 +34,10 @@ var LMA_LEVELS = [
       "Canvas, WebGL & audio fingerprints randomised per site",
       "Hides your GPU and battery; WebRTC can't leak your IP",
     ],
-    rulesets: ["trackers", "params", "signals", "balanced", "strict"],
   },
   {
     name: "Paranoid",
-    blurb: "Totally over the top. Things will break — trust sites as needed.",
+    blurb: "Totally over the top. Things will break — turn it down on sites that do.",
     features: [
       "Everything in Strict",
       "No third-party iframes, embeds or websockets",
@@ -49,11 +45,19 @@ var LMA_LEVELS = [
       "Hardware, screen & timer precision spoofed; WebRTC off",
       "Site cookies & storage wiped when you close its last tab",
     ],
-    rulesets: ["trackers", "params", "signals", "balanced", "strict", "paranoid"],
   },
 ];
-var LMA_ALL_RULESETS = ["trackers", "params", "signals", "balanced", "strict", "paranoid"];
+// Each network ruleset switches on at this level. Order matters: it sets the rule ID ranges.
+var LMA_RULESETS = [
+  ["trackers", 1], ["params", 1], ["signals", 1], ["balanced", 2], ["strict", 3], ["paranoid", 4],
+];
 var LMA_DEFAULT_LEVEL = 2;
+
+// Stored state: { level: everywhere level, siteLevels: { "example.com": 0-4 } }.
+function lmaLevelFor(state, site) {
+  const own = state.siteLevels && state.siteLevels[site];
+  return own === undefined ? state.level : own;
+}
 
 // Reduce a hostname to its "site" (good-enough eTLD+1 without shipping the PSL).
 function lmaSite(host) {

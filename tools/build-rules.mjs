@@ -44,14 +44,16 @@ write("params.json", params.flatMap((p) => ["?", "&"].map((sep) => `${sep}${p}=`
   condition: { urlFilter: f, isUrlFilterCaseSensitive: true, resourceTypes: ["main_frame", "sub_frame"] },
 })));
 
-write("signals.json", [{
-  id: 1, priority: 1,
-  action: { type: "modifyHeaders", requestHeaders: [
-    { header: "Sec-GPC", operation: "set", value: "1" },
-    { header: "DNT", operation: "set", value: "1" },
-  ] },
-  condition: { resourceTypes: ["main_frame", ...SUB] },
-}]);
+// Two rules: page loads are scoped to the site being visited, everything else to the
+// page that made the request (see siteScope() in background.js).
+const signalHeaders = { type: "modifyHeaders", requestHeaders: [
+  { header: "Sec-GPC", operation: "set", value: "1" },
+  { header: "DNT", operation: "set", value: "1" },
+] };
+write("signals.json", [
+  { id: 1, priority: 1, action: signalHeaders, condition: { resourceTypes: ["main_frame"] } },
+  { id: 2, priority: 1, action: signalHeaders, condition: { resourceTypes: SUB } },
+]);
 
 // Balanced --------------------------------------------------------------------
 write("balanced.json", [

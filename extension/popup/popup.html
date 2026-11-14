@@ -10,31 +10,34 @@
     <h1>Leave Me Alone</h1>
   </header>
 
-  <section class="site">
-    <div>
+  <section id="siteBox" class="level-box" hidden>
+    <div class="host-row">
       <div id="host" class="host">—</div>
-      <div id="count" class="muted">&nbsp;</div>
+      <div id="count" class="muted"></div>
     </div>
-    <label class="switch" title="Protection on this site">
-      <input type="checkbox" id="siteOn" checked>
-      <span></span>
-    </label>
-  </section>
-
-  <section>
     <div class="level-head">
-      <span id="levelName" class="level-name">Balanced</span>
-      <span id="levelNum" class="muted">2 / 4</span>
+      <span><span class="muted">On this site</span> <span id="siteName" class="level-name">Balanced</span></span>
+      <span id="siteTag" class="tag"></span>
     </div>
-    <input type="range" id="level" min="0" max="4" step="1" list="ticks">
+    <input type="range" id="siteLevel" min="0" max="4" step="1" aria-label="Protection on this site">
     <div class="ticks"><span>Off</span><span>Mild</span><span>Bal.</span><span>Strict</span><span>Paranoid</span></div>
     <p id="blurb" class="blurb"></p>
     <ul id="features" class="features"></ul>
   </section>
 
+  <section id="allBox" class="level-box everywhere">
+    <div class="level-head">
+      <span><span class="muted">Everywhere else</span> <span id="allName" class="level-name small">Balanced</span></span>
+    </div>
+    <input type="range" id="allLevel" min="0" max="4" step="1" aria-label="Protection everywhere else">
+    <div class="ticks"><span>Off</span><span>Mild</span><span>Bal.</span><span>Strict</span><span>Paranoid</span></div>
+    <p id="allBlurb" class="blurb" hidden></p>
+    <ul id="allFeatures" class="features" hidden></ul>
+  </section>
+
   <footer>
-    <span id="reload" class="muted" hidden>Reload the page to apply.</span>
-    <a href="#" id="opts">Trusted sites</a>
+    <a href="#" id="reload" hidden>Reload page to apply</a>
+    <a href="#" id="opts">Site settings</a>
   </footer>
 <script src="../src/levels.js"></script>
 <script src="popup.js"></script>

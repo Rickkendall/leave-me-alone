@@ -85,9 +85,10 @@ try {
   const page = cdp((await targets()).find((t) => t.type === "page").webSocketDebuggerUrl);
   await page.send("Page.enable");
 
-  const setLevel = async (level, allowlist = []) => {
-    await bg.eval(`chrome.storage.local.set({level:${level}, allowlist:${JSON.stringify(allowlist)}})`);
-    await sleep(600);
+  const setState = async (level, siteLevels = {}, extra = {}) => {
+    await bg.eval(`chrome.storage.local.set(${JSON.stringify({ level, siteLevels, ...extra })})`);
+    // Wait for the worker to finish rebuilding its rules.
+    await bg.eval(`new Promise((r) => setTimeout(r, 150)).then(() => applying)`);
   };
   const visit = async (url) => {
     hits.length = 0;
@@ -96,15 +97,11 @@ try {
     return page.eval("location.href");
   };
   const hit = (host) => hits.find((h) => h.host === host);
+  let baseline;
 
-  // Seed a third-party cookie so we can see whether it is sent.
-  await setLevel(0);
-  await visit(`http://cdn.friendly.test:${PORT}/seed`);
-
-  for (const level of [0, 1, 2, 3, 4]) {
-    console.log(`\nLevel ${level}`);
-    await setLevel(level);
-    const url = await visit(`http://news.site.test:${PORT}/page?id=7&utm_source=mail&fbclid=abc`);
+  // Visit a page on `host` and check it is protected exactly as `level` says.
+  async function expectLevel(host, level) {
+    const url = await visit(`http://${host}:${PORT}/page?id=7&utm_source=mail&fbclid=abc`);
     const trk = !!hit("pixel.quantserve.com"), cdn = hit("cdn.friendly.test");
     check("tracker blocked", trk === (level === 0), `tracker hit=${trk}`);
     check("tracking params stripped", (url.includes("utm_source")) === (level === 0), url);
@@ -117,7 +114,7 @@ try {
       x.font = '14px Arial'; x.fillText('fp test', 2, 15);
       return { data: c.toDataURL().slice(-40), cores: navigator.hardwareConcurrency,
         rtc: typeof RTCPeerConnection, ts: Function.prototype.toString.call(HTMLCanvasElement.prototype.toDataURL) }; })()`);
-    if (level === 0) var baseline = fp.data;
+    if (baseline === undefined) baseline = fp.data; // first visit is always at level 0
     check("canvas fingerprint randomised", (fp.data !== baseline) === (level >= 3));
     check("spoofed function looks native", fp.ts.includes("[native code]"), fp.ts);
     check("hardware spoofed / WebRTC removed", (fp.cores === 4 && fp.rtc === "undefined") === (level >= 4),
@@ -127,10 +124,34 @@ try {
     check("redirect link unwrapped + cleaned", (link === "https://example.org/?a=1") === (level >= 1), link);
   }
 
-  console.log("\nTrusted site");
-  await setLevel(4, ["site.test"]);
-  const url = await visit(`http://news.site.test:${PORT}/page?utm_source=mail`);
-  check("trusted site is left alone", !!hit("pixel.quantserve.com") && url.includes("utm_source"));
+  const SITE = "news.site.test", OTHER = "blog.elsewhere.test";
+  for (const level of [0, 1, 2, 3, 4]) {
+    console.log(`\nEverywhere ${level}`);
+    await setState(level);
+    await expectLevel(SITE, level);
+  }
+
+  // Per-site levels: the site gets its own level, everything else keeps the everywhere one.
+  for (const [all, own] of [[2, 4], [4, 1], [0, 3], [3, 0], [1, 2], [4, 0]]) {
+    console.log(`\nEverywhere ${all}, site.test ${own}`);
+    await setState(all, { "site.test": own });
+    await expectLevel(SITE, own);
+    console.log(`  (other site)`);
+    await expectLevel(OTHER, all);
+  }
+
+  console.log("\nChrome cookie exception for a site set below Balanced");
+  const ok = await bg.eval(`chrome.contentSettings.cookies.set({ primaryPattern: "<all_urls>",
+    secondaryPattern: "*://*.site.test/*", setting: "allow" }).then(() => "ok", (e) => e.message)`);
+  check("Chrome accepts the exception pattern", ok === "ok", ok);
+
+  console.log("\nOld trusted-sites list is migrated");
+  await setState(4, {}, { allowlist: ["site.test"] });
+  await expectLevel(SITE, 0);
+  const stored = await bg.eval(`chrome.storage.local.get(null)`);
+  check("allowlist became siteLevels", stored.siteLevels?.["site.test"] === 0 && !("allowlist" in stored),
+    JSON.stringify(stored));
+
 
   bg.close(); page.close();
 } catch (e) {

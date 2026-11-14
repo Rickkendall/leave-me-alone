@@ -1,6 +1,6 @@
 # Leave Me Alone
 
-An anti-tracking extension for Chrome, Edge, Brave, Opera, Arc and other Chromium browsers, plus Safari on Mac, iPhone and iPad. One slider takes it from **Mild** to **Paranoid**. Everything runs on your device and nothing phones home.
+An anti-tracking extension for Chrome, Edge, Brave, Opera, Arc and other Chromium browsers, plus Safari on Mac, iPhone and iPad. One slider takes it from **Mild** to **Paranoid**, and any site can have its own level. Everything runs on your device and nothing phones home.
 
 | Level | What it does |
 |---|---|
@@ -10,7 +10,10 @@ An anti-tracking extension for Chrome, Edge, Brave, Opera, Arc and other Chromiu
 | **Strict** | Also blocks session-replay tools (FullStory, LogRocket, Hotjar and others), fingerprinting vendors, IP-lookup services and social widgets. Randomises the canvas, WebGL, audio and text-metric fingerprints per site per day, so sites can't link you to each other. Hides your GPU model and battery and limits user-agent hints. Stops WebRTC leaking your IP. |
 | **Paranoid** | Also blocks all third-party iframes, embeds and websockets. Sends no Referer on any navigation. Kills ETag supercookies. Spoofs CPU cores, RAM, screen, touch points and languages. Coarsens timers. Removes WebRTC and hides media devices and font probing. Wipes a site's cookies and storage when you close its last tab. |
 
-If a site breaks, turn it off for that site with the switch in the popup. That adds the site to the trusted list, which you can manage under **Trusted sites** in the popup or on the extension's options page.
+## Per-site levels
+The popup has two sliders: one for the site you're on and one for everywhere else. So you can run a news site on Paranoid, your bank on Mild and everything else on Balanced. If a site breaks, slide it down, or all the way to Off. **Site settings** (in the popup, or the extension's options page) lists every site with its own level, where you can change or remove them. A site's level covers its subdomains too.
+
+A few things are Chrome-wide settings that can't be set per site, so they follow the everywhere level: WebRTC IP protection, Chrome's Topics/FLEDGE ad APIs, network prediction and `<a ping>` auditing. Chrome's own third-party cookie block also follows the everywhere level, but sites you set below Balanced get a cookie exception so turning a site down really does undo it.
 
 ## Install: Chrome, Edge, Brave and other Chromium browsers
 1. Open `chrome://extensions` (or `edge://extensions`, `brave://extensions`).
@@ -34,7 +37,7 @@ node tools/build-rules.mjs   # after editing tools/lists.mjs
 node tools/make-icons.mjs    # regenerate icons
 node tools/test-e2e.mjs      # headless Chrome end-to-end test, all 5 levels
 ```
-The e2e test loads the extension into headless Chrome, sends every hostname to a local server and checks each level: trackers blocked, tags stripped, GPC sent, Referer stripped, iframes blocked, canvas randomised, hardware spoofed, links unwrapped, and trusted sites left alone.
+The e2e test loads the extension into headless Chrome, sends every hostname to a local server and checks each level: trackers blocked, tags stripped, GPC sent, Referer stripped, iframes blocked, canvas randomised, hardware spoofed, links unwrapped. It then checks mixed setups, such as Paranoid on one site and Balanced everywhere else, to confirm each site gets exactly its own level, and that 1.0's trusted-sites list is carried over as sites set to Off.
 
 ## Limits worth knowing
 - The block lists are curated by hand rather than full EasyList or EasyPrivacy. Add domains to `tools/lists.mjs`.

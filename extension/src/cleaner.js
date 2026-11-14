@@ -4,7 +4,10 @@
   const api = globalThis.browser ?? globalThis.chrome;
   const PARAMS = new Set(LMA_TRACKING_PARAMS);
   let level = 2;
-  api.storage.local.get({ level: 2 }).then((s) => { level = s.level; cleanLocation(); });
+  api.storage.local.get({ level: LMA_DEFAULT_LEVEL, siteLevels: {} }).then((s) => {
+    level = lmaLevelFor(s, lmaSite(location.hostname));
+    cleanLocation();
+  });
 
   // host -> query param that holds the real destination
   const REDIRECTORS = [

@@ -2,16 +2,29 @@
   "manifest_version": 3,
   "name": "Leave Me Alone",
   "short_name": "LeaveMeAlone",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Anti-tracking from mild to paranoid: blocks trackers, third-party cookies, link tracking and browser fingerprinting.",
-  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "Leave Me Alone",
-    "default_icon": { "16": "icons/16.png", "32": "icons/32.png" }
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png"
+    }
   },
-  "options_ui": { "page": "options/options.html", "open_in_tab": true },
-  "background": { "service_worker": "src/background.js" },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
   "permissions": [
     "declarativeNetRequest",
     "declarativeNetRequestFeedback",
@@ -20,17 +33,10 @@
     "tabs",
     "cookies",
     "browsingData",
-    "privacy"
+    "privacy",
+    "contentSettings"
   ],
-  "host_permissions": ["<all_urls>"],
-  "declarative_net_request": {
-    "rule_resources": [
-      { "id": "trackers", "enabled": true, "path": "rules/trackers.json" },
-      { "id": "params", "enabled": true, "path": "rules/params.json" },
-      { "id": "signals", "enabled": true, "path": "rules/signals.json" },
-      { "id": "balanced", "enabled": true, "path": "rules/balanced.json" },
-      { "id": "strict", "enabled": false, "path": "rules/strict.json" },
-      { "id": "paranoid", "enabled": false, "path": "rules/paranoid.json" }
-    ]
-  }
+  "host_permissions": [
+    "<all_urls>"
+  ]
 }

@@ -19,7 +19,30 @@
   },
   "condition": {
    "resourceTypes": [
-    "main_frame",
+    "main_frame"
+   ]
+  }
+ },
+ {
+  "id": 2,
+  "priority": 1,
+  "action": {
+   "type": "modifyHeaders",
+   "requestHeaders": [
+    {
+     "header": "Sec-GPC",
+     "operation": "set",
+     "value": "1"
+    },
+    {
+     "header": "DNT",
+     "operation": "set",
+     "value": "1"
+    }
+   ]
+  },
+  "condition": {
+   "resourceTypes": [
     "sub_frame",
     "stylesheet",
     "script",

@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Leave Me Alone — Settings</title>
+<title>Leave Me Alone — Site settings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../ui.css">
 </head>
-<body class="options" data-level="2">
+<body class="options">
   <h1>Leave Me Alone</h1>
   <p class="muted">Everything runs on your device. Nothing is collected, nothing phones home.</p>
 
-  <h2>Trusted sites</h2>
-  <p class="muted">Protection is switched off on these sites (and their subdomains). Use this when a site breaks.</p>
+  <h2>Everywhere</h2>
+  <div class="row" id="allRow">
+    <select id="allLevel" aria-label="Level everywhere"></select>
+  </div>
+  <p class="muted">Used on every site that doesn't have its own setting below. Browser-wide settings
+    (WebRTC, Chrome's ad-topic tracking and similar) also follow this level.</p>
+
+  <h2>Site settings</h2>
+  <p class="muted">Give a site its own level: turn it up on sites you don't trust, down or off on sites that break.
+    It covers the site's subdomains too.</p>
   <form id="add" class="row">
     <input type="text" id="site" placeholder="example.com" autocomplete="off" spellcheck="false">
-    <button type="submit">Trust</button>
+    <select id="newLevel" aria-label="Level for this site"></select>
+    <button type="submit">Add</button>
   </form>
   <ul id="list"></ul>
 
