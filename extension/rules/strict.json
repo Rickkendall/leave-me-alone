@@ -1,0 +1,244 @@
+[
+ {
+  "id": 1,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "requestDomains": [
+    "fullstory.com",
+    "logrocket.io",
+    "lr-ingest.io",
+    "lr-in.com",
+    "smartlook.com",
+    "smartlook.cloud",
+    "quantummetric.com",
+    "contentsquare.net",
+    "clicktale.net",
+    "decibelinsight.net",
+    "glassboxdigital.io",
+    "sessioncam.com",
+    "uxcam.com",
+    "posthog.com",
+    "i.posthog.com",
+    "fingerprint.com",
+    "fpjs.io",
+    "fpcdn.io",
+    "openfpcdn.io",
+    "iovation.com",
+    "threatmetrix.com",
+    "online-metrix.net",
+    "deviceatlas.com",
+    "51degrees.com",
+    "maxmind.com",
+    "ipinfo.io",
+    "ipapi.co",
+    "ip-api.com",
+    "geoip-db.com",
+    "ipify.org",
+    "platform.twitter.com",
+    "syndication.twitter.com",
+    "platform.linkedin.com",
+    "assets.pinterest.com",
+    "widgets.pinterest.com",
+    "addthis.com",
+    "addtoany.com",
+    "sharethis.com",
+    "shareaholic.com",
+    "acxiom.com",
+    "liveramp.com",
+    "oracleinfinity.io",
+    "zeotap.com",
+    "the-trade-desk.com",
+    "nielsen.com",
+    "yieldify.com",
+    "intercom-metrics.com",
+    "fls.doubleclick.net",
+    "stats.g.doubleclick.net",
+    "cm.g.doubleclick.net",
+    "ad.doubleclick.net",
+    "securepubads.g.doubleclick.net"
+   ],
+   "domainType": "thirdParty",
+   "resourceTypes": [
+    "sub_frame",
+    "stylesheet",
+    "script",
+    "image",
+    "font",
+    "object",
+    "xmlhttprequest",
+    "ping",
+    "csp_report",
+    "media",
+    "websocket",
+    "webtransport",
+    "webbundle",
+    "other"
+   ]
+  }
+ },
+ {
+  "id": 2,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||sentry-cdn.com/replay",
+   "domainType": "thirdParty",
+   "resourceTypes": [
+    "sub_frame",
+    "stylesheet",
+    "script",
+    "image",
+    "font",
+    "object",
+    "xmlhttprequest",
+    "ping",
+    "csp_report",
+    "media",
+    "websocket",
+    "webtransport",
+    "webbundle",
+    "other"
+   ]
+  }
+ },
+ {
+  "id": 3,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||disqus.com/count",
+   "domainType": "thirdParty",
+   "resourceTypes": [
+    "sub_frame",
+    "stylesheet",
+    "script",
+    "image",
+    "font",
+    "object",
+    "xmlhttprequest",
+    "ping",
+    "csp_report",
+    "media",
+    "websocket",
+    "webtransport",
+    "webbundle",
+    "other"
+   ]
+  }
+ },
+ {
+  "id": 4,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||disquscdn.com/count",
+   "domainType": "thirdParty",
+   "resourceTypes": [
+    "sub_frame",
+    "stylesheet",
+    "script",
+    "image",
+    "font",
+    "object",
+    "xmlhttprequest",
+    "ping",
+    "csp_report",
+    "media",
+    "websocket",
+    "webtransport",
+    "webbundle",
+    "other"
+   ]
+  }
+ },
+ {
+  "id": 5,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||gravatar.com/avatar",
+   "domainType": "thirdParty",
+   "resourceTypes": [
+    "sub_frame",
+    "stylesheet",
+    "script",
+    "image",
+    "font",
+    "object",
+    "xmlhttprequest",
+    "ping",
+    "csp_report",
+    "media",
+    "websocket",
+    "webtransport",
+    "webbundle",
+    "other"
+   ]
+  }
+ },
+ {
+  "id": 6,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||drift.com/track",
+   "domainType": "thirdParty",
+   "resourceTypes": [
+    "sub_frame",
+    "stylesheet",
+    "script",
+    "image",
+    "font",
+    "object",
+    "xmlhttprequest",
+    "ping",
+    "csp_report",
+    "media",
+    "websocket",
+    "webtransport",
+    "webbundle",
+    "other"
+   ]
+  }
+ },
+ {
+  "id": 7,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||intercomcdn.com/track",
+   "domainType": "thirdParty",
+   "resourceTypes": [
+    "sub_frame",
+    "stylesheet",
+    "script",
+    "image",
+    "font",
+    "object",
+    "xmlhttprequest",
+    "ping",
+    "csp_report",
+    "media",
+    "websocket",
+    "webtransport",
+    "webbundle",
+    "other"
+   ]
+  }
+ }
+]

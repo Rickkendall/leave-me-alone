@@ -1,0 +1,66 @@
+:root {
+  --bg: #ffffff; --fg: #17151f; --muted: #6b6878; --line: #e6e4ee; --card: #f6f5fa;
+  --accent: #4b3fd6; --l0: #9a98a6; --l1: #2f9e6a; --l2: #4b3fd6; --l3: #c27a12; --l4: #c8323c;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #16151b; --fg: #eeedf3; --muted: #9895a6; --line: #2c2a35; --card: #1f1e26;
+    --l1: #4cc58d; --l2: #8b82ff; --l3: #f0a43a; --l4: #ff6b72; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+body[data-level="0"] { --accent: var(--l0); } body[data-level="1"] { --accent: var(--l1); }
+body[data-level="2"] { --accent: var(--l2); } body[data-level="3"] { --accent: var(--l3); }
+body[data-level="4"] { --accent: var(--l4); }
+.muted { color: var(--muted); font-size: 12px; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+
+/* popup */
+.popup { width: 320px; }
+.popup header { display: flex; align-items: center; gap: 10px; padding: 14px 16px 10px; }
+.popup h1 { font-size: 15px; margin: 0; letter-spacing: -0.01em; }
+.popup section { padding: 12px 16px; border-top: 1px solid var(--line); }
+.site { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.host { font-weight: 600; word-break: break-all; }
+.trusted .host { color: var(--muted); }
+
+.switch { position: relative; width: 40px; height: 24px; flex: none; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch span { position: absolute; inset: 0; border-radius: 12px; background: var(--line); transition: .15s; cursor: pointer; }
+.switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px;
+  border-radius: 50%; background: #fff; transition: .15s; box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+.switch input:checked + span { background: var(--accent); }
+.switch input:checked + span::after { transform: translateX(16px); }
+.switch input:disabled + span { opacity: .4; cursor: default; }
+
+.level-head { display: flex; align-items: baseline; justify-content: space-between; }
+.level-name { font-size: 20px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+input[type=range] { width: 100%; margin: 10px 0 2px; accent-color: var(--accent); }
+.ticks { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); }
+.blurb { margin: 12px 0 6px; font-weight: 500; }
+.features { margin: 0; padding: 0; list-style: none; }
+.features li { position: relative; padding: 3px 0 3px 18px; color: var(--muted); }
+.features li::before { content: ""; position: absolute; left: 2px; top: 9px; width: 8px; height: 8px;
+  border-radius: 2px; background: var(--accent); }
+.popup footer { display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px 14px; border-top: 1px solid var(--line); }
+#reload { cursor: pointer; color: var(--accent); }
+
+/* options */
+.options { max-width: 640px; margin: 0 auto; padding: 32px 16px; }
+.options h1 { font-size: 22px; margin: 0 0 4px; }
+.options h2 { font-size: 15px; margin: 28px 0 8px; }
+.options .row { display: flex; gap: 8px; }
+.options input[type=text] { flex: 1; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--card); color: var(--fg); font: inherit; }
+.options button { padding: 8px 14px; border: 0; border-radius: 8px; background: var(--accent); color: #fff;
+  font: inherit; font-weight: 600; cursor: pointer; }
+.options button.ghost { background: transparent; color: var(--muted); padding: 4px 8px; }
+.options ul { list-style: none; padding: 0; margin: 12px 0 0; border: 1px solid var(--line); border-radius: 10px; }
+.options li { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; }
+.options li + li { border-top: 1px solid var(--line); }
+.options .empty { color: var(--muted); padding: 12px; }
+.levels { display: grid; gap: 10px; }
+.levels div { background: var(--card); border-radius: 10px; padding: 10px 14px; }
+.levels b { display: block; }

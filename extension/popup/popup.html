@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../ui.css">
+</head>
+<body class="popup">
+  <header>
+    <img src="../icons/48.png" alt="" width="28" height="28">
+    <h1>Leave Me Alone</h1>
+  </header>
+
+  <section class="site">
+    <div>
+      <div id="host" class="host">—</div>
+      <div id="count" class="muted">&nbsp;</div>
+    </div>
+    <label class="switch" title="Protection on this site">
+      <input type="checkbox" id="siteOn" checked>
+      <span></span>
+    </label>
+  </section>
+
+  <section>
+    <div class="level-head">
+      <span id="levelName" class="level-name">Balanced</span>
+      <span id="levelNum" class="muted">2 / 4</span>
+    </div>
+    <input type="range" id="level" min="0" max="4" step="1" list="ticks">
+    <div class="ticks"><span>Off</span><span>Mild</span><span>Bal.</span><span>Strict</span><span>Paranoid</span></div>
+    <p id="blurb" class="blurb"></p>
+    <ul id="features" class="features"></ul>
+  </section>
+
+  <footer>
+    <span id="reload" class="muted" hidden>Reload the page to apply.</span>
+    <a href="#" id="opts">Trusted sites</a>
+  </footer>
+<script src="../src/levels.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

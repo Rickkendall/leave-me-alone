@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Leave Me Alone — Settings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../ui.css">
+</head>
+<body class="options" data-level="2">
+  <h1>Leave Me Alone</h1>
+  <p class="muted">Everything runs on your device. Nothing is collected, nothing phones home.</p>
+
+  <h2>Trusted sites</h2>
+  <p class="muted">Protection is switched off on these sites (and their subdomains). Use this when a site breaks.</p>
+  <form id="add" class="row">
+    <input type="text" id="site" placeholder="example.com" autocomplete="off" spellcheck="false">
+    <button type="submit">Trust</button>
+  </form>
+  <ul id="list"></ul>
+
+  <h2>Levels</h2>
+  <div id="levels" class="levels"></div>
+
+<script src="../src/levels.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

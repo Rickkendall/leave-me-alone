@@ -1,0 +1,58 @@
+[
+ {
+  "id": 1,
+  "priority": 1,
+  "action": {
+   "type": "modifyHeaders",
+   "requestHeaders": [
+    {
+     "header": "cookie",
+     "operation": "remove"
+    },
+    {
+     "header": "referer",
+     "operation": "remove"
+    }
+   ],
+   "responseHeaders": [
+    {
+     "header": "set-cookie",
+     "operation": "remove"
+    }
+   ]
+  },
+  "condition": {
+   "domainType": "thirdParty",
+   "resourceTypes": [
+    "sub_frame",
+    "stylesheet",
+    "script",
+    "image",
+    "font",
+    "object",
+    "xmlhttprequest",
+    "ping",
+    "csp_report",
+    "media",
+    "websocket",
+    "webtransport",
+    "webbundle",
+    "other"
+   ]
+  }
+ },
+ {
+  "id": 2,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "domainType": "thirdParty",
+   "resourceTypes": [
+    "ping",
+    "csp_report"
+   ]
+  }
+ }
+]
